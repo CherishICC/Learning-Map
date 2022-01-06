@@ -1,0 +1,1704 @@
+{
+    "map_details": {
+        "map_id": "12123334867",
+        "time_taken": 310.8779306411743,
+        "num_resources": 6,
+        "num_topics": 83,
+        "num_levels": 4,
+        "X_Axis": {
+            "volume_range": {
+                "min_volume": 49.55804443359375,
+                "max_volume": 187.41603088378906
+            },
+            "interval": 0.9882352941176471,
+            "start": 0.0,
+            "end": 85.0
+        },
+        "Y_Axis": {
+            "volume_range": {
+                "min_volume": 0.19030392056900217,
+                "max_volume": 12.061136016078715
+            },
+            "interval": 1.0,
+            "start": 0.0585550524827699,
+            "end": 3.711118774178066
+        }
+    },
+    "topics": [
+        {
+            "0": {
+                "topic_name": "brain",
+                "topic_type": "Relevant",
+                "topic_volume": 61.348907470703125,
+                "topic_cluster_id": 5,
+                "topic_cluster_probability": 0.20439758421179752
+            }
+        },
+        {
+            "1": {
+                "topic_name": "network",
+                "topic_type": "Relevant",
+                "topic_volume": 61.684017181396484,
+                "topic_cluster_id": 5,
+                "topic_cluster_probability": 0.2952632334032871
+            }
+        },
+        {
+            "2": {
+                "topic_name": "convolutional",
+                "topic_type": "Marker",
+                "topic_volume": 64.9926986694336,
+                "topic_cluster_id": 5,
+                "topic_cluster_probability": 0.15019993290581013
+            }
+        },
+        {
+            "3": {
+                "topic_name": "neuron",
+                "topic_type": "Generic",
+                "topic_volume": 68.7992935180664,
+                "topic_cluster_id": 5,
+                "topic_cluster_probability": 0.19203298903093946
+            }
+        },
+        {
+            "4": {
+                "topic_name": "wave",
+                "topic_type": "Marker",
+                "topic_volume": 77.66100311279297,
+                "topic_cluster_id": 5,
+                "topic_cluster_probability": 0.15810626044816575
+            }
+        },
+        {
+            "5": {
+                "topic_name": "eigenvector",
+                "topic_type": "Generic",
+                "topic_volume": 62.84161376953125,
+                "topic_cluster_id": 3,
+                "topic_cluster_probability": 0.0953167092541037
+            }
+        },
+        {
+            "6": {
+                "topic_name": "norm",
+                "topic_type": "Relevant",
+                "topic_volume": 62.865936279296875,
+                "topic_cluster_id": 3,
+                "topic_cluster_probability": 0.12939955638037862
+            }
+        },
+        {
+            "7": {
+                "topic_name": "vector",
+                "topic_type": "Marker",
+                "topic_volume": 63.80055236816406,
+                "topic_cluster_id": 3,
+                "topic_cluster_probability": 0.11820318800074436
+            }
+        },
+        {
+            "8": {
+                "topic_name": "matrix",
+                "topic_type": "Relevant",
+                "topic_volume": 65.17720794677734,
+                "topic_cluster_id": 3,
+                "topic_cluster_probability": 0.22047962504292665
+            }
+        },
+        {
+            "9": {
+                "topic_name": "singular",
+                "topic_type": "Generic",
+                "topic_volume": 69.13418579101562,
+                "topic_cluster_id": 3,
+                "topic_cluster_probability": 0.09600544347686547
+            }
+        },
+        {
+            "10": {
+                "topic_name": "column",
+                "topic_type": "Relevant",
+                "topic_volume": 74.41036224365234,
+                "topic_cluster_id": 3,
+                "topic_cluster_probability": 0.11319419958316264
+            }
+        },
+        {
+            "11": {
+                "topic_name": "transpose",
+                "topic_type": "Marker",
+                "topic_volume": 77.47898864746094,
+                "topic_cluster_id": 3,
+                "topic_cluster_probability": 0.11241586670417913
+            }
+        },
+        {
+            "12": {
+                "topic_name": "algebra",
+                "topic_type": "Marker",
+                "topic_volume": 78.91722106933594,
+                "topic_cluster_id": 3,
+                "topic_cluster_probability": 0.11498541155763939
+            }
+        },
+        {
+            "13": {
+                "topic_name": "neural",
+                "topic_type": "Generic",
+                "topic_volume": 56.65122604370117,
+                "topic_cluster_id": 0,
+                "topic_cluster_probability": 0.07947926209541577
+            }
+        },
+        {
+            "14": {
+                "topic_name": "local",
+                "topic_type": "Marker",
+                "topic_volume": 56.85531234741211,
+                "topic_cluster_id": 0,
+                "topic_cluster_probability": 0.10354396184299453
+            }
+        },
+        {
+            "15": {
+                "topic_name": "eigenvalue",
+                "topic_type": "Generic",
+                "topic_volume": 64.25395965576172,
+                "topic_cluster_id": 0,
+                "topic_cluster_probability": 0.1006849562392834
+            }
+        },
+        {
+            "16": {
+                "topic_name": "critical",
+                "topic_type": "Marker",
+                "topic_volume": 64.71651458740234,
+                "topic_cluster_id": 0,
+                "topic_cluster_probability": 0.09735811295447035
+            }
+        },
+        {
+            "17": {
+                "topic_name": "gradient",
+                "topic_type": "Relevant",
+                "topic_volume": 66.41912078857422,
+                "topic_cluster_id": 0,
+                "topic_cluster_probability": 0.12683616414004273
+            }
+        },
+        {
+            "18": {
+                "topic_name": "derivative",
+                "topic_type": "Relevant",
+                "topic_volume": 71.5285873413086,
+                "topic_cluster_id": 0,
+                "topic_cluster_probability": 0.14017562659965443
+            }
+        },
+        {
+            "19": {
+                "topic_name": "hessian",
+                "topic_type": "Relevant",
+                "topic_volume": 75.34504699707031,
+                "topic_cluster_id": 0,
+                "topic_cluster_probability": 0.14848681010945655
+            }
+        },
+        {
+            "20": {
+                "topic_name": "curvature",
+                "topic_type": "Generic",
+                "topic_volume": 75.63946533203125,
+                "topic_cluster_id": 0,
+                "topic_cluster_probability": 0.09213879690804126
+            }
+        },
+        {
+            "21": {
+                "topic_name": "saddle",
+                "topic_type": "Marker",
+                "topic_volume": 91.80781555175781,
+                "topic_cluster_id": 0,
+                "topic_cluster_probability": 0.11129630911064096
+            }
+        },
+        {
+            "22": {
+                "topic_name": "training",
+                "topic_type": "Generic",
+                "topic_volume": 59.16270446777344,
+                "topic_cluster_id": 1,
+                "topic_cluster_probability": 0.10159477393407107
+            }
+        },
+        {
+            "23": {
+                "topic_name": "learn",
+                "topic_type": "Generic",
+                "topic_volume": 65.20940399169922,
+                "topic_cluster_id": 1,
+                "topic_cluster_probability": 0.0967559766882012
+            }
+        },
+        {
+            "24": {
+                "topic_name": "task",
+                "topic_type": "Generic",
+                "topic_volume": 66.21597290039062,
+                "topic_cluster_id": 1,
+                "topic_cluster_probability": 0.09463165097313574
+            }
+        },
+        {
+            "25": {
+                "topic_name": "estimation",
+                "topic_type": "Marker",
+                "topic_volume": 66.51557159423828,
+                "topic_cluster_id": 1,
+                "topic_cluster_probability": 0.09693030012721522
+            }
+        },
+        {
+            "26": {
+                "topic_name": "capacity",
+                "topic_type": "Relevant",
+                "topic_volume": 68.53825378417969,
+                "topic_cluster_id": 1,
+                "topic_cluster_probability": 0.13152438409056746
+            }
+        },
+        {
+            "27": {
+                "topic_name": "estimator",
+                "topic_type": "Relevant",
+                "topic_volume": 69.15193939208984,
+                "topic_cluster_id": 1,
+                "topic_cluster_probability": 0.16444758774485166
+            }
+        },
+        {
+            "28": {
+                "topic_name": "regression",
+                "topic_type": "Marker",
+                "topic_volume": 69.47435760498047,
+                "topic_cluster_id": 1,
+                "topic_cluster_probability": 0.10871089350843977
+            }
+        },
+        {
+            "29": {
+                "topic_name": "manifold",
+                "topic_type": "Marker",
+                "topic_volume": 78.48150634765625,
+                "topic_cluster_id": 1,
+                "topic_cluster_probability": 0.10022245081425063
+            }
+        },
+        {
+            "30": {
+                "topic_name": "bias",
+                "topic_type": "Relevant",
+                "topic_volume": 86.90336608886719,
+                "topic_cluster_id": 1,
+                "topic_cluster_probability": 0.10518198211926731
+            }
+        },
+        {
+            "31": {
+                "topic_name": "low",
+                "topic_type": "Relevant",
+                "topic_volume": 56.31636047363281,
+                "topic_cluster_id": 7,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "32": {
+                "topic_name": "point",
+                "topic_type": "Marker",
+                "topic_volume": 64.42188262939453,
+                "topic_cluster_id": 7,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "33": {
+                "topic_name": "apply",
+                "topic_type": "Marker",
+                "topic_volume": 64.68952941894531,
+                "topic_cluster_id": 7,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "34": {
+                "topic_name": "measure",
+                "topic_type": "Relevant",
+                "topic_volume": 65.81544494628906,
+                "topic_cluster_id": 7,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "35": {
+                "topic_name": "represent",
+                "topic_type": "Marker",
+                "topic_volume": 71.03910827636719,
+                "topic_cluster_id": 7,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "36": {
+                "topic_name": "recurrent",
+                "topic_type": "Generic",
+                "topic_volume": 71.12492370605469,
+                "topic_cluster_id": 7,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "37": {
+                "topic_name": "meaning",
+                "topic_type": "Generic",
+                "topic_volume": 74.53923034667969,
+                "topic_cluster_id": 7,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "38": {
+                "topic_name": "specify",
+                "topic_type": "Relevant",
+                "topic_volume": 79.1944580078125,
+                "topic_cluster_id": 7,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "39": {
+                "topic_name": "distinguish",
+                "topic_type": "Generic",
+                "topic_volume": 86.8134536743164,
+                "topic_cluster_id": 7,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "40": {
+                "topic_name": "state",
+                "topic_type": "Generic",
+                "topic_volume": 49.55804443359375,
+                "topic_cluster_id": 2,
+                "topic_cluster_probability": 0.06862382571409693
+            }
+        },
+        {
+            "41": {
+                "topic_name": "event",
+                "topic_type": "Marker",
+                "topic_volume": 59.475921630859375,
+                "topic_cluster_id": 2,
+                "topic_cluster_probability": 0.08757012940963262
+            }
+        },
+        {
+            "42": {
+                "topic_name": "conditional",
+                "topic_type": "Marker",
+                "topic_volume": 62.930545806884766,
+                "topic_cluster_id": 2,
+                "topic_cluster_probability": 0.07509392021265883
+            }
+        },
+        {
+            "43": {
+                "topic_name": "probability",
+                "topic_type": "Relevant",
+                "topic_volume": 68.1640396118164,
+                "topic_cluster_id": 2,
+                "topic_cluster_probability": 0.10895550760739377
+            }
+        },
+        {
+            "44": {
+                "topic_name": "distribution",
+                "topic_type": "Relevant",
+                "topic_volume": 68.67269134521484,
+                "topic_cluster_id": 2,
+                "topic_cluster_probability": 0.2791753105134813
+            }
+        },
+        {
+            "45": {
+                "topic_name": "mass",
+                "topic_type": "Marker",
+                "topic_volume": 74.10367584228516,
+                "topic_cluster_id": 2,
+                "topic_cluster_probability": 0.08094256958287163
+            }
+        },
+        {
+            "46": {
+                "topic_name": "gaussian",
+                "topic_type": "Generic",
+                "topic_volume": 76.73387908935547,
+                "topic_cluster_id": 2,
+                "topic_cluster_probability": 0.06871308494894345
+            }
+        },
+        {
+            "47": {
+                "topic_name": "random",
+                "topic_type": "Relevant",
+                "topic_volume": 80.27151489257812,
+                "topic_cluster_id": 2,
+                "topic_cluster_probability": 0.1633572992244413
+            }
+        },
+        {
+            "48": {
+                "topic_name": "multinoulli",
+                "topic_type": "Generic",
+                "topic_volume": 94.8270263671875,
+                "topic_cluster_id": 2,
+                "topic_cluster_probability": 0.06756835278648025
+            }
+        },
+        {
+            "49": {
+                "topic_name": "tation",
+                "topic_type": "Generic",
+                "topic_volume": 50.070068359375,
+                "topic_cluster_id": 8,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "50": {
+                "topic_name": "allow",
+                "topic_type": "Marker",
+                "topic_volume": 62.989097595214844,
+                "topic_cluster_id": 8,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "51": {
+                "topic_name": "find",
+                "topic_type": "Marker",
+                "topic_volume": 69.40184020996094,
+                "topic_cluster_id": 8,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "52": {
+                "topic_name": "design",
+                "topic_type": "Relevant",
+                "topic_volume": 70.2962417602539,
+                "topic_cluster_id": 8,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "53": {
+                "topic_name": "describe",
+                "topic_type": "Relevant",
+                "topic_volume": 72.40472412109375,
+                "topic_cluster_id": 8,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "54": {
+                "topic_name": "\f  ",
+                "topic_type": "Marker",
+                "topic_volume": 78.91136932373047,
+                "topic_cluster_id": 8,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "55": {
+                "topic_name": "accumulation",
+                "topic_type": "Generic",
+                "topic_volume": 82.66209411621094,
+                "topic_cluster_id": 8,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "56": {
+                "topic_name": "develop",
+                "topic_type": "Relevant",
+                "topic_volume": 86.77229309082031,
+                "topic_cluster_id": 8,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "57": {
+                "topic_name": "intrinsic",
+                "topic_type": "Generic",
+                "topic_volume": 90.79852294921875,
+                "topic_cluster_id": 8,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "58": {
+                "topic_name": "normal",
+                "topic_type": "Generic",
+                "topic_volume": 62.938236236572266,
+                "topic_cluster_id": 6,
+                "topic_cluster_probability": 0.11083194715072826
+            }
+        },
+        {
+            "59": {
+                "topic_name": "mode",
+                "topic_type": "Relevant",
+                "topic_volume": 64.70348358154297,
+                "topic_cluster_id": 6,
+                "topic_cluster_probability": 0.11435585622748017
+            }
+        },
+        {
+            "60": {
+                "topic_name": "divergence",
+                "topic_type": "Generic",
+                "topic_volume": 68.17899322509766,
+                "topic_cluster_id": 6,
+                "topic_cluster_probability": 0.10988290582201031
+            }
+        },
+        {
+            "61": {
+                "topic_name": "covariance",
+                "topic_type": "Relevant",
+                "topic_volume": 68.54737091064453,
+                "topic_cluster_id": 6,
+                "topic_cluster_probability": 0.12062845141459898
+            }
+        },
+        {
+            "62": {
+                "topic_name": "mixture",
+                "topic_type": "Relevant",
+                "topic_volume": 72.42682647705078,
+                "topic_cluster_id": 6,
+                "topic_cluster_probability": 0.11646784062934744
+            }
+        },
+        {
+            "63": {
+                "topic_name": "factorization",
+                "topic_type": "Generic",
+                "topic_volume": 77.3822250366211,
+                "topic_cluster_id": 6,
+                "topic_cluster_probability": 0.1102571268897547
+            }
+        },
+        {
+            "64": {
+                "topic_name": "dirac",
+                "topic_type": "Marker",
+                "topic_volume": 102.90827178955078,
+                "topic_cluster_id": 6,
+                "topic_cluster_probability": 0.11229341379160471
+            }
+        },
+        {
+            "65": {
+                "topic_name": "twice",
+                "topic_type": "Marker",
+                "topic_volume": 108.44165802001953,
+                "topic_cluster_id": 6,
+                "topic_cluster_probability": 0.10335970277320627
+            }
+        },
+        {
+            "66": {
+                "topic_name": "heavy",
+                "topic_type": "Marker",
+                "topic_volume": 166.72799682617188,
+                "topic_cluster_id": 6,
+                "topic_cluster_probability": 0.10192275530126914
+            }
+        },
+        {
+            "67": {
+                "topic_name": "reality",
+                "topic_type": "Relevant",
+                "topic_volume": 67.2045669555664,
+                "topic_cluster_id": 4,
+                "topic_cluster_probability": 0.15146848527810736
+            }
+        },
+        {
+            "68": {
+                "topic_name": "math",
+                "topic_type": "Marker",
+                "topic_volume": 76.27272033691406,
+                "topic_cluster_id": 4,
+                "topic_cluster_probability": 0.12344272103297106
+            }
+        },
+        {
+            "69": {
+                "topic_name": "goal",
+                "topic_type": "Relevant",
+                "topic_volume": 79.4267578125,
+                "topic_cluster_id": 4,
+                "topic_cluster_probability": 0.12345508268790548
+            }
+        },
+        {
+            "70": {
+                "topic_name": "subsequent",
+                "topic_type": "Marker",
+                "topic_volume": 80.90940856933594,
+                "topic_cluster_id": 4,
+                "topic_cluster_probability": 0.10359381286966392
+            }
+        },
+        {
+            "71": {
+                "topic_name": "belief",
+                "topic_type": "Marker",
+                "topic_volume": 90.88106536865234,
+                "topic_cluster_id": 4,
+                "topic_cluster_probability": 0.11171792205376437
+            }
+        },
+        {
+            "72": {
+                "topic_name": "elementary",
+                "topic_type": "Relevant",
+                "topic_volume": 94.29989624023438,
+                "topic_cluster_id": 4,
+                "topic_cluster_probability": 0.15148358122295216
+            }
+        },
+        {
+            "73": {
+                "topic_name": "applied",
+                "topic_type": "Generic",
+                "topic_volume": 94.51163482666016,
+                "topic_cluster_id": 4,
+                "topic_cluster_probability": 0.07557136813754997
+            }
+        },
+        {
+            "74": {
+                "topic_name": "framework",
+                "topic_type": "Generic",
+                "topic_volume": 107.28242492675781,
+                "topic_cluster_id": 4,
+                "topic_cluster_probability": 0.08370322560031353
+            }
+        },
+        {
+            "75": {
+                "topic_name": "broad",
+                "topic_type": "Generic",
+                "topic_volume": 117.55755615234375,
+                "topic_cluster_id": 4,
+                "topic_cluster_probability": 0.07556380111677206
+            }
+        },
+        {
+            "76": {
+                "topic_name": "define",
+                "topic_type": "Marker",
+                "topic_volume": 62.9936408996582,
+                "topic_cluster_id": 9,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "77": {
+                "topic_name": "general",
+                "topic_type": "Relevant",
+                "topic_volume": 63.199832916259766,
+                "topic_cluster_id": 9,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "78": {
+                "topic_name": "deep",
+                "topic_type": "Relevant",
+                "topic_volume": 63.775394439697266,
+                "topic_cluster_id": 9,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "79": {
+                "topic_name": "correspond",
+                "topic_type": "Marker",
+                "topic_volume": 69.19477081298828,
+                "topic_cluster_id": 9,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "80": {
+                "topic_name": "find",
+                "topic_type": "Marker",
+                "topic_volume": 69.40184020996094,
+                "topic_cluster_id": 9,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "81": {
+                "topic_name": "develop",
+                "topic_type": "Relevant",
+                "topic_volume": 86.77229309082031,
+                "topic_cluster_id": 9,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "82": {
+                "topic_name": "turn",
+                "topic_type": "Generic",
+                "topic_volume": 109.78357696533203,
+                "topic_cluster_id": 9,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "83": {
+                "topic_name": "russakovsky",
+                "topic_type": "Generic",
+                "topic_volume": 156.88970947265625,
+                "topic_cluster_id": 9,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        },
+        {
+            "84": {
+                "topic_name": "ilsvrc",
+                "topic_type": "Generic",
+                "topic_volume": 187.41603088378906,
+                "topic_cluster_id": 9,
+                "topic_cluster_probability": 0.11111111111111113
+            }
+        }
+    ],
+    "resources": [
+        {
+            "0": {
+                "resource_volume": 10.272212982177734,
+                "resource_mapping": [
+                    {
+                        "40": 0.06862382571409693
+                    },
+                    {
+                        "41": 0.08757012940963262
+                    },
+                    {
+                        "42": 0.07509392021265883
+                    },
+                    {
+                        "43": 0.10895550760739377
+                    },
+                    {
+                        "44": 0.2791753105134813
+                    },
+                    {
+                        "45": 0.08094256958287163
+                    },
+                    {
+                        "46": 0.06871308494894345
+                    },
+                    {
+                        "47": 0.1633572992244413
+                    },
+                    {
+                        "48": 0.06756835278648025
+                    }
+                ],
+                "resource_polyline": [
+                    {
+                        "x": 40,
+                        "y": 0.1990205597827549
+                    },
+                    {
+                        "x": 41,
+                        "y": 0.25396800592207736
+                    },
+                    {
+                        "x": 42,
+                        "y": 0.2177849148088926
+                    },
+                    {
+                        "x": 43,
+                        "y": 0.315989175622181
+                    },
+                    {
+                        "x": 44,
+                        "y": 0.8096550432411089
+                    },
+                    {
+                        "x": 45,
+                        "y": 0.23474697513590373
+                    },
+                    {
+                        "x": 46,
+                        "y": 0.19927942647664842
+                    },
+                    {
+                        "x": 47,
+                        "y": 0.4737634604007321
+                    },
+                    {
+                        "x": 48,
+                        "y": 0.1959595119512776
+                    }
+                ]
+            }
+        },
+        {
+            "1": {
+                "resource_volume": 133.8985137939453,
+                "resource_mapping": [
+                    {
+                        "0": 0.20439758421179752
+                    },
+                    {
+                        "1": 0.2952632334032871
+                    },
+                    {
+                        "2": 0.15019993290581013
+                    },
+                    {
+                        "3": 0.19203298903093946
+                    },
+                    {
+                        "4": 0.15810626044816575
+                    },
+                    {
+                        "5": 0.0953167092541037
+                    },
+                    {
+                        "6": 0.12939955638037862
+                    },
+                    {
+                        "7": 0.11820318800074436
+                    },
+                    {
+                        "8": 0.22047962504292665
+                    },
+                    {
+                        "9": 0.09600544347686547
+                    },
+                    {
+                        "10": 0.11319419958316264
+                    },
+                    {
+                        "11": 0.11241586670417913
+                    },
+                    {
+                        "12": 0.11498541155763939
+                    },
+                    {
+                        "13": 0.07947926209541577
+                    },
+                    {
+                        "14": 0.10354396184299453
+                    },
+                    {
+                        "15": 0.1006849562392834
+                    },
+                    {
+                        "16": 0.09735811295447035
+                    },
+                    {
+                        "17": 0.12683616414004273
+                    },
+                    {
+                        "18": 0.14017562659965443
+                    },
+                    {
+                        "19": 0.14848681010945655
+                    },
+                    {
+                        "20": 0.09213879690804126
+                    },
+                    {
+                        "21": 0.11129630911064096
+                    },
+                    {
+                        "22": 0.10159477393407107
+                    },
+                    {
+                        "23": 0.0967559766882012
+                    },
+                    {
+                        "24": 0.09463165097313574
+                    },
+                    {
+                        "25": 0.09693030012721522
+                    },
+                    {
+                        "26": 0.13152438409056746
+                    },
+                    {
+                        "27": 0.16444758774485166
+                    },
+                    {
+                        "28": 0.10871089350843977
+                    },
+                    {
+                        "29": 0.10022245081425063
+                    },
+                    {
+                        "30": 0.10518198211926731
+                    },
+                    {
+                        "31": 0.11111111111111113
+                    },
+                    {
+                        "32": 0.11111111111111113
+                    },
+                    {
+                        "33": 0.11111111111111113
+                    },
+                    {
+                        "34": 0.11111111111111113
+                    },
+                    {
+                        "35": 0.11111111111111113
+                    },
+                    {
+                        "36": 0.11111111111111113
+                    },
+                    {
+                        "37": 0.11111111111111113
+                    },
+                    {
+                        "38": 0.11111111111111113
+                    },
+                    {
+                        "39": 0.11111111111111113
+                    },
+                    {
+                        "40": 0.06862382571409693
+                    },
+                    {
+                        "41": 0.08757012940963262
+                    },
+                    {
+                        "42": 0.07509392021265883
+                    },
+                    {
+                        "43": 0.10895550760739377
+                    },
+                    {
+                        "44": 0.2791753105134813
+                    },
+                    {
+                        "45": 0.08094256958287163
+                    },
+                    {
+                        "46": 0.06871308494894345
+                    },
+                    {
+                        "47": 0.1633572992244413
+                    },
+                    {
+                        "48": 0.06756835278648025
+                    },
+                    {
+                        "49": 0.11111111111111113
+                    },
+                    {
+                        "50": 0.11111111111111113
+                    },
+                    {
+                        "51": 0.11111111111111113
+                    },
+                    {
+                        "52": 0.11111111111111113
+                    },
+                    {
+                        "53": 0.11111111111111113
+                    },
+                    {
+                        "54": 0.11111111111111113
+                    },
+                    {
+                        "55": 0.11111111111111113
+                    },
+                    {
+                        "56": 0.11111111111111113
+                    },
+                    {
+                        "57": 0.11111111111111113
+                    },
+                    {
+                        "58": 0.11083194715072826
+                    },
+                    {
+                        "59": 0.11435585622748017
+                    },
+                    {
+                        "60": 0.10988290582201031
+                    },
+                    {
+                        "61": 0.12062845141459898
+                    },
+                    {
+                        "62": 0.11646784062934744
+                    },
+                    {
+                        "63": 0.1102571268897547
+                    },
+                    {
+                        "64": 0.11229341379160471
+                    },
+                    {
+                        "65": 0.10335970277320627
+                    },
+                    {
+                        "66": 0.10192275530126914
+                    },
+                    {
+                        "67": 0.15146848527810736
+                    },
+                    {
+                        "68": 0.12344272103297106
+                    },
+                    {
+                        "69": 0.12345508268790548
+                    },
+                    {
+                        "70": 0.10359381286966392
+                    },
+                    {
+                        "71": 0.11171792205376437
+                    },
+                    {
+                        "72": 0.15148358122295216
+                    },
+                    {
+                        "73": 0.07557136813754997
+                    },
+                    {
+                        "74": 0.08370322560031353
+                    },
+                    {
+                        "75": 0.07556380111677206
+                    },
+                    {
+                        "76": 0.11111111111111113
+                    },
+                    {
+                        "77": 0.11111111111111113
+                    },
+                    {
+                        "78": 0.11111111111111113
+                    },
+                    {
+                        "79": 0.11111111111111113
+                    },
+                    {
+                        "80": 0.11111111111111113
+                    },
+                    {
+                        "81": 0.11111111111111113
+                    },
+                    {
+                        "82": 0.11111111111111113
+                    },
+                    {
+                        "83": 0.11111111111111113
+                    },
+                    {
+                        "84": 0.11111111111111113
+                    }
+                ],
+                "resource_polyline": [
+                    {
+                        "x": 0,
+                        "y": 0.17713206517148972
+                    },
+                    {
+                        "x": 1,
+                        "y": 0.25587673407989875
+                    },
+                    {
+                        "x": 2,
+                        "y": 0.13016408391919598
+                    },
+                    {
+                        "x": 3,
+                        "y": 0.16641683931478204
+                    },
+                    {
+                        "x": 4,
+                        "y": 0.137015750639721
+                    },
+                    {
+                        "x": 5,
+                        "y": 0.08260185757139839
+                    },
+                    {
+                        "x": 6,
+                        "y": 0.11213819496683881
+                    },
+                    {
+                        "x": 7,
+                        "y": 0.1024353754565058
+                    },
+                    {
+                        "x": 8,
+                        "y": 0.191068562140977
+                    },
+                    {
+                        "x": 9,
+                        "y": 0.08319871751986191
+                    },
+                    {
+                        "x": 10,
+                        "y": 0.09809456521364633
+                    },
+                    {
+                        "x": 11,
+                        "y": 0.09742005869620524
+                    },
+                    {
+                        "x": 12,
+                        "y": 0.09964683697747187
+                    },
+                    {
+                        "x": 13,
+                        "y": 0.0688768402716455
+                    },
+                    {
+                        "x": 14,
+                        "y": 0.08973134290541733
+                    },
+                    {
+                        "x": 15,
+                        "y": 0.0872537246297702
+                    },
+                    {
+                        "x": 16,
+                        "y": 0.08437067756194794
+                    },
+                    {
+                        "x": 17,
+                        "y": 0.10991639816250655
+                    },
+                    {
+                        "x": 18,
+                        "y": 0.12147639508393342
+                    },
+                    {
+                        "x": 19,
+                        "y": 0.12867887839820658
+                    },
+                    {
+                        "x": 20,
+                        "y": 0.07984761093828502
+                    },
+                    {
+                        "x": 21,
+                        "y": 0.09644953794657145
+                    },
+                    {
+                        "x": 22,
+                        "y": 0.08804745987966797
+                    },
+                    {
+                        "x": 23,
+                        "y": 0.08385389962185341
+                    },
+                    {
+                        "x": 24,
+                        "y": 0.08201284544233477
+                    },
+                    {
+                        "x": 25,
+                        "y": 0.08400497762919888
+                    },
+                    {
+                        "x": 26,
+                        "y": 0.1139860593511164
+                    },
+                    {
+                        "x": 27,
+                        "y": 0.14251906691252775
+                    },
+                    {
+                        "x": 28,
+                        "y": 0.09421466935768448
+                    },
+                    {
+                        "x": 29,
+                        "y": 0.08685813133297773
+                    },
+                    {
+                        "x": 30,
+                        "y": 0.09115632617795853
+                    },
+                    {
+                        "x": 31,
+                        "y": 3.711118774178066
+                    },
+                    {
+                        "x": 32,
+                        "y": 3.711118774178066
+                    },
+                    {
+                        "x": 33,
+                        "y": 3.711118774178066
+                    },
+                    {
+                        "x": 34,
+                        "y": 3.711118774178066
+                    },
+                    {
+                        "x": 35,
+                        "y": 3.711118774178066
+                    },
+                    {
+                        "x": 36,
+                        "y": 3.711118774178066
+                    },
+                    {
+                        "x": 37,
+                        "y": 3.711118774178066
+                    },
+                    {
+                        "x": 38,
+                        "y": 3.711118774178066
+                    },
+                    {
+                        "x": 39,
+                        "y": 3.711118774178066
+                    },
+                    {
+                        "x": 40,
+                        "y": 0.05946973028860659
+                    },
+                    {
+                        "x": 41,
+                        "y": 0.07588868622723012
+                    },
+                    {
+                        "x": 42,
+                        "y": 0.06507674462753803
+                    },
+                    {
+                        "x": 43,
+                        "y": 0.09442135560709318
+                    },
+                    {
+                        "x": 44,
+                        "y": 0.2419346378128871
+                    },
+                    {
+                        "x": 45,
+                        "y": 0.07014521169389301
+                    },
+                    {
+                        "x": 46,
+                        "y": 0.059547082761553884
+                    },
+                    {
+                        "x": 47,
+                        "y": 0.14156620422223237
+                    },
+                    {
+                        "x": 48,
+                        "y": 0.0585550524827699
+                    },
+                    {
+                        "x": 49,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 50,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 51,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 52,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 53,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 54,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 55,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 56,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 57,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 58,
+                        "y": 0.09604710420874972
+                    },
+                    {
+                        "x": 59,
+                        "y": 0.09910092822807016
+                    },
+                    {
+                        "x": 60,
+                        "y": 0.09522466380468628
+                    },
+                    {
+                        "x": 61,
+                        "y": 0.10453676707313862
+                    },
+                    {
+                        "x": 62,
+                        "y": 0.1009311765558157
+                    },
+                    {
+                        "x": 63,
+                        "y": 0.09554896425067477
+                    },
+                    {
+                        "x": 64,
+                        "y": 0.09731361303010042
+                    },
+                    {
+                        "x": 65,
+                        "y": 0.0895716478728156
+                    },
+                    {
+                        "x": 66,
+                        "y": 0.08832638739397597
+                    },
+                    {
+                        "x": 67,
+                        "y": 0.13126280229129136
+                    },
+                    {
+                        "x": 68,
+                        "y": 0.10697563559508239
+                    },
+                    {
+                        "x": 69,
+                        "y": 0.10698634822262779
+                    },
+                    {
+                        "x": 70,
+                        "y": 0.0897745438752145
+                    },
+                    {
+                        "x": 71,
+                        "y": 0.0968149083158271
+                    },
+                    {
+                        "x": 72,
+                        "y": 0.13127588445831723
+                    },
+                    {
+                        "x": 73,
+                        "y": 0.06549025387365759
+                    },
+                    {
+                        "x": 74,
+                        "y": 0.07253733298345294
+                    },
+                    {
+                        "x": 75,
+                        "y": 0.06548369628281299
+                    },
+                    {
+                        "x": 76,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 77,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 78,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 79,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 80,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 81,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 82,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 83,
+                        "y": 0.09628902804644751
+                    },
+                    {
+                        "x": 84,
+                        "y": 0.09628902804644751
+                    }
+                ]
+            }
+        },
+        {
+            "2": {
+                "resource_volume": 38.34471893310547,
+                "resource_mapping": [
+                    {
+                        "22": 0.10159477393407107
+                    },
+                    {
+                        "23": 0.0967559766882012
+                    },
+                    {
+                        "24": 0.09463165097313574
+                    },
+                    {
+                        "25": 0.09693030012721522
+                    },
+                    {
+                        "26": 0.13152438409056746
+                    },
+                    {
+                        "27": 0.16444758774485166
+                    },
+                    {
+                        "28": 0.10871089350843977
+                    },
+                    {
+                        "29": 0.10022245081425063
+                    },
+                    {
+                        "30": 0.10518198211926731
+                    }
+                ],
+                "resource_polyline": [
+                    {
+                        "x": 22,
+                        "y": 1.1308957377639313
+                    },
+                    {
+                        "x": 23,
+                        "y": 1.0770329752481231
+                    },
+                    {
+                        "x": 24,
+                        "y": 1.0533861792195316
+                    },
+                    {
+                        "x": 25,
+                        "y": 1.0789734454764563
+                    },
+                    {
+                        "x": 26,
+                        "y": 1.464055281786173
+                    },
+                    {
+                        "x": 27,
+                        "y": 1.8305378206451668
+                    },
+                    {
+                        "x": 28,
+                        "y": 1.2101083683397367
+                    },
+                    {
+                        "x": 29,
+                        "y": 1.1156198105981603
+                    },
+                    {
+                        "x": 30,
+                        "y": 1.1708265165827603
+                    }
+                ]
+            }
+        },
+        {
+            "3": {
+                "resource_volume": 22.01471710205078,
+                "resource_mapping": [
+                    {
+                        "0": 0.20439758421179752
+                    },
+                    {
+                        "1": 0.2952632334032871
+                    },
+                    {
+                        "2": 0.15019993290581013
+                    },
+                    {
+                        "3": 0.19203298903093946
+                    },
+                    {
+                        "4": 0.15810626044816575
+                    }
+                ],
+                "resource_polyline": [
+                    {
+                        "x": 0,
+                        "y": 1.2981996040226207
+                    },
+                    {
+                        "x": 1,
+                        "y": 1.8753187038130457
+                    },
+                    {
+                        "x": 2,
+                        "y": 0.9539716145592899
+                    },
+                    {
+                        "x": 3,
+                        "y": 1.2196677924574846
+                    },
+                    {
+                        "x": 4,
+                        "y": 1.0041874296059279
+                    }
+                ]
+            }
+        },
+        {
+            "4": {
+                "resource_volume": 6.628401279449463,
+                "resource_mapping": [
+                    {
+                        "0": 0.20439758421179752
+                    },
+                    {
+                        "1": 0.2952632334032871
+                    },
+                    {
+                        "2": 0.15019993290581013
+                    },
+                    {
+                        "3": 0.19203298903093946
+                    },
+                    {
+                        "4": 0.15810626044816575
+                    }
+                ],
+                "resource_polyline": [
+                    {
+                        "x": 0,
+                        "y": 0.3850294023441132
+                    },
+                    {
+                        "x": 1,
+                        "y": 0.556195547661939
+                    },
+                    {
+                        "x": 2,
+                        "y": 0.28293578234723593
+                    },
+                    {
+                        "x": 3,
+                        "y": 0.3617378712280722
+                    },
+                    {
+                        "x": 4,
+                        "y": 0.29782915097538765
+                    }
+                ]
+            }
+        },
+        {
+            "5": {
+                "resource_volume": 11.640966415405273,
+                "resource_mapping": [
+                    {
+                        "13": 0.07947926209541577
+                    },
+                    {
+                        "14": 0.10354396184299453
+                    },
+                    {
+                        "15": 0.1006849562392834
+                    },
+                    {
+                        "16": 0.09735811295447035
+                    },
+                    {
+                        "17": 0.12683616414004273
+                    },
+                    {
+                        "18": 0.14017562659965443
+                    },
+                    {
+                        "19": 0.14848681010945655
+                    },
+                    {
+                        "20": 0.09213879690804126
+                    },
+                    {
+                        "21": 0.11129630911064096
+                    }
+                ],
+                "resource_polyline": [
+                    {
+                        "x": 13,
+                        "y": 0.2593810270919348
+                    },
+                    {
+                        "x": 14,
+                        "y": 0.33791631255661986
+                    },
+                    {
+                        "x": 15,
+                        "y": 0.3285859313930162
+                    },
+                    {
+                        "x": 16,
+                        "y": 0.31772875927744254
+                    },
+                    {
+                        "x": 17,
+                        "y": 0.4139305481667659
+                    },
+                    {
+                        "x": 18,
+                        "y": 0.4574639603098557
+                    },
+                    {
+                        "x": 19,
+                        "y": 0.48458755529912484
+                    },
+                    {
+                        "x": 20,
+                        "y": 0.3006954914645764
+                    },
+                    {
+                        "x": 21,
+                        "y": 0.363216142268696
+                    }
+                ]
+            }
+        }
+    ]
+}
