@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+
+<html>
+  <body>
+    Input file name: <input type="text" id="filename" /><br/><br/>
+    Output file name: <input type="text" id="resultfile" /><br /><br/>
+    <button onclick="myFunction()">Generate Mapping</button>
+    <div id="mapping" style="visibility: hidden">
+      <p id="result"></p>
+      <button id="mapping" onclick="yourFunction()">Generate Visualization</button>
+    </div>
+  </body>
+
+  <script>
+    function myFunction() {
+      var filename = document.getElementById("filename").value;
+      var resultfile = document.getElementById("resultfile").value;
+      sessionStorage.setItem("resultfile",resultfile);
+
+      var settings = {
+        url: "http://localhost:3000/name?filename=" + filename + "&resultfile=" + resultfile,
+        method: "GET",
+        timeout: 0,
+      };
+
+      $.ajax(settings).done(function (response) {
+        document.getElementById("mapping").style.visibility = "visible";
+        document.getElementById("result").innerHTML = response;
+      });
+    }
+
+    function yourFunction() {
+        document.location.replace("d3graph.html");
+    }
+  </script>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</html>

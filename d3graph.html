@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+
+The columns required in the csv files are x, y, resource_name, type, level, topic. In addition to these another column 'pathway_name' is required in the pathway file to visualize pathways<br />
+Pathway file name :
+<input type="text" id="Pfname" size="40" name="Pfname" /><br />
+<input type="button" value="Submit" onclick="myFunction()" />
+
+<div id="mapButtons1" style="visibility:visible">
+  <button id="Learner1" , style="margin-top: 30px; margin-left: 570px">
+    Learner
+  </button>
+  <button id="Resource1">Resources</button>
+  <button id="AllLayers1">All Layers</button>
+</div>
+
+<div id="mapButtons2" style="visibility:hidden">
+  <button id="Learner2" , style="margin-left: 570px">
+    Learner
+  </button>
+  <button id="Resource2">Resources</button>
+  <button id="Pathway">Pathway</button>
+  <button id="AllLayers2">All Layers</button>
+</div>
+
+<svg id="my_dataviz" width="1500" height="600"></svg>
+<script src="https://d3js.org/d3.v6.js"></script>
+
+<style>
+  div.tooltip {
+    position: absolute;
+    text-align: left;
+    width: 120px;
+    height: 50px;
+    padding: 3px;
+    font: 11px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 3px;
+    pointer-events: none;
+  }
+
+  .label {
+    position: absolute;
+    font: 13px sans-serif;
+  }
+</style>
+
+<script>
+  var fname;
+
+  function myFunction() {
+    document.getElementById("my_dataviz").innerHTML = "";
+
+    var fname = sessionStorage.getItem("resultfile");
+    Pfname = document.getElementById("Pfname").value;
+    submitOK = "true";
+
+    if (
+      Pfname.substr(Pfname.length - 5) != ".json"
+    ) {
+      alert("Please enter a valid json file");
+      submitOK = "false";
+    }
+
+    if (submitOK == "false") {
+      return false;
+    }
+
+    if(Pfname != ""){
+      document.getElementById("mapButtons1").style.visibility = "hidden";
+      document.getElementById("mapButtons2").style.visibility = "visible";
+    }
+
+  }
+
+  try {
+    document.getElementById("Learner1").addEventListener("click", function () {
+      document.getElementById("my_dataviz").innerHTML = "";
+
+      // dimensions and margins
+      var margin = {
+        top: 50,
+        right: 30,
+        bottom: 30,
+        left: 210,
+      };
+      var svg = d3.select("svg"),
+        width = 1410 - margin.left - margin.right,
+        height = 620 - margin.top - margin.bottom;
+
+      // create a clipping region
+      svg
+        .append("defs")
+        .append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("width", width)
+        .attr("height", height);
+
+      d3.json("JSON_files/" + sessionStorage.getItem("resultfile")).then(function (data) {
+        // create scale objects
+        var xScale = d3.scaleLinear().domain([0, 1]).range([0, width]);
+        var yScale = d3.scaleLinear().domain([0, 1]).range([height, 0]);
+        // create axis objects
+        var xAxis = d3.axisBottom(xScale).ticks(0).tickSize(-540);
+        var yAxis = d3.axisLeft(yScale).ticks(0).tickSize(-1170);
+
+        // Draw X-Axis
+        var gX = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + (margin.top + height) + ")"
+          )
+          .call(xAxis);
+
+        // Draw Y-Axis
+        var gY = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .call(yAxis);
+
+        // Draw Datapoints
+        var points_g = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .attr("clip-path", "url(#clip)")
+          .classed("points_g", true);
+
+        // Write Labels
+        var label = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .attr("class", "label")
+          .attr("clip-path", "url(#clip)");
+
+        // Draw Tooltip
+        var div = d3
+          .select("body")
+          .append("div")
+          .attr("class", "tooltip")
+          .style("opacity", 0);
+
+        const mouseover = function (event, d) {
+          div.style("opacity", 1);
+        };
+
+        const mousemove = function (event, d) {
+          div
+            .html(`This is ${d.resource_name}`)
+            .style("position", "absolute")
+            .style("left", event.pageX + 15 + "px")
+            .style("top", event.pageY + 15 + "px");
+        };
+
+        const mouseleave = function (event, d) {
+          div.transition().duration(200).style("opacity", 0);
+        };
+
+        var points = points_g.selectAll("point").data(data);
+
+        points = points
+          .enter()
+          .append("image")
+          .attr("xlink:href", function (d) {
+            if (d.type == "learner") return "Images/BlueDot.png";
+            else if (d.type == "none") return "Images/GreenDot.png";
+            else if (d.type == "iiitb") return "Images/BlueDot.png";
+          })
+          .attr("x", function (d) {
+            return xScale(d.ld[0]) - 10;
+          })
+          .attr("y", function (d) {
+            return yScale(d.ld[1]) - 10;
+          })
+          .attr("width", 20)
+          .attr("height", 20)
+          .attr("visibility", function (d) {
+            return d.type == "learner" || d.type == "none" || d.type == "iiitb"
+              ? "visible"
+              : "hidden";
+          })
+          .on("mouseover", mouseover)
+          .on("mousemove", mousemove)
+          .on("mouseleave", mouseleave);
+
+        label
+          .selectAll(".text")
+          .data(data)
+          .enter()
+          .append("text")
+          .text(function (d) {
+            if (d.type == "learner" || d.type == "none" || d.type == "iiitb")
+              return d.resource_name;
+          })
+          .attr("x", function (d) {
+            return xScale(d.ld[0]) + 15;
+          })
+          .attr("y", function (d) {
+            return yScale(d.ld[1]) + 15;
+          });
+
+        // Pan and zoom
+        var zoom = d3
+          .zoom()
+          .scaleExtent([0.5, 20])
+          .extent([
+            [0, 0],
+            [width, height],
+          ])
+          .on("zoom", zoomed);
+
+        svg
+          .append("rect")
+          .attr("width", width)
+          .attr("height", height)
+          .style("fill", "none")
+          .style("pointer-events", "all")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .lower();
+
+        svg.call(zoom).call(zoom.transform, d3.zoomIdentity);
+
+        function zoomed({ transform }) {
+          // create new scale ojects based on event
+          var new_xScale = transform.rescaleX(xScale);
+          var new_yScale = transform.rescaleY(yScale);
+
+          // update axes
+          gX.call(xAxis.scale(new_xScale));
+          gY.call(yAxis.scale(new_yScale));
+
+          // update points
+          points
+            .data(data)
+            .attr("x", function (d) {
+              return new_xScale(d.ld[0]) - 10;
+            })
+            .attr("y", function (d) {
+              return new_yScale(d.ld[1]) - 10;
+            })
+            .attr("visibility", function (d) {
+              return d.level > transform.k == 0 &&
+                (d.type == "learner" || d.type == "none" || d.type == "iiitb")
+                ? "visible"
+                : "hidden";
+            });
+
+          // update label positions
+          label
+            .selectAll("text")
+            .data(data)
+            .attr("x", function (d) {
+              return new_xScale(d.ld[0]) + 15;
+            })
+            .attr("y", function (d) {
+              return new_yScale(d.ld[1]) + 15;
+            })
+            .attr("visibility", function (d) {
+              return d.level > transform.k == 0 &&
+                (d.type == "learner" || d.type == "none" || d.type == "iiitb")
+                ? "visible"
+                : "hidden";
+            });
+        }
+      });
+    });
+
+    document.getElementById("Resource1").addEventListener("click", function () {
+      document.getElementById("my_dataviz").innerHTML = "";
+
+      // dimensions and margins
+      var margin = {
+        top: 50,
+        right: 30,
+        bottom: 30,
+        left: 210,
+      };
+      var svg = d3.select("svg"),
+        width = 1410 - margin.left - margin.right,
+        height = 620 - margin.top - margin.bottom;
+
+      // create a clipping region
+      svg
+        .append("defs")
+        .append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("width", width)
+        .attr("height", height);
+
+      d3.json("JSON_files/" + sessionStorage.getItem("resultfile")).then(function (data) {
+        // create scale objects
+        var xScale = d3.scaleLinear().domain([0, 1]).range([0, width]);
+        var yScale = d3.scaleLinear().domain([0, 1]).range([height, 0]);
+        // create axis objects
+        var xAxis = d3.axisBottom(xScale).ticks(0).tickSize(-540);
+        var yAxis = d3.axisLeft(yScale).ticks(0).tickSize(-1170);
+
+        // Draw Axis
+        var gX = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + (margin.top + height) + ")"
+          )
+          .call(xAxis);
+
+        var gY = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .call(yAxis);
+
+        // Draw Datapoints
+        var points_g = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .attr("clip-path", "url(#clip)")
+          .classed("points_g", true);
+
+        var label = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .attr("class", "label")
+          .attr("clip-path", "url(#clip)");
+
+        var div = d3
+          .select("body")
+          .append("div")
+          .attr("class", "tooltip")
+          .style("opacity", 0);
+
+        const mouseover = function (event, d) {
+          div.style("opacity", 1);
+        };
+
+        const mousemove = function (event, d) {
+          div
+            .html(function (d1) {
+              if (d.type == "learner")
+                return `This is the learner - ${d.resource_name}`;
+              else if (d.type == "Step") return `This is ${d.resource_name}`;
+              else return `The resource name is ${d.resource_name}`;
+            })
+            .style("position", "absolute")
+            .style("left", event.pageX + 15 + "px")
+            .style("top", event.pageY + 15 + "px");
+        };
+
+        const mouseleave = function (event, d) {
+          div.transition().duration(200).style("opacity", 0);
+        };
+
+        var points = points_g.selectAll("point").data(data);
+
+        points = points
+          .enter()
+          .append("image")
+          .attr("xlink:href", function (d) {
+            if (d.type == "video") return "Images/video.jpg";
+            else if (d.type == "pdf") return "Images/pdf.png";
+            else if (d.type == "none") return "Images/GreenDot.png";
+            else if (d.type == "Step") return "Images/Flag.png";
+            else if (d.type == "iiitb") return "Images/BlueDot.png";
+            else if (d.type == "learner") return "Images/BlueDot.png";
+          })
+          .attr("x", function (d) {
+            return xScale(d.ld[0]) - 10;
+          })
+          .attr("y", function (d) {
+            return yScale(d.ld[1]) - 10;
+          })
+          .attr("width", 20)
+          .attr("height", 20)
+          .on("mouseover", mouseover)
+          .on("mousemove", mousemove)
+          .on("mouseleave", mouseleave);
+
+        label
+          .selectAll(".text")
+          .data(data)
+          .enter()
+          .append("text")
+          .text(function (d) {
+            return d.resource_name;
+          })
+          .attr("x", function (d) {
+            return xScale(d.ld[0]) + 10;
+          })
+          .attr("y", function (d) {
+            return yScale(d.ld[1]) + 10;
+          });
+
+        // Pan and zoom
+        var zoom = d3
+          .zoom()
+          .scaleExtent([0.5, 20])
+          .extent([
+            [0, 0],
+            [width, height],
+          ])
+          .on("zoom", zoomed);
+
+        svg
+          .append("rect")
+          .attr("width", width)
+          .attr("height", height)
+          .style("fill", "none")
+          .style("pointer-events", "all")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .lower();
+
+        svg.call(zoom).call(zoom.transform, d3.zoomIdentity);
+
+        function zoomed({ transform }) {
+          // create new scale ojects based on event
+          var new_xScale = transform.rescaleX(xScale);
+          var new_yScale = transform.rescaleY(yScale);
+
+          // update axes
+          gX.call(xAxis.scale(new_xScale));
+          gY.call(yAxis.scale(new_yScale));
+
+          points
+            .data(data)
+            .attr("x", function (d) {
+              return new_xScale(d.ld[0]) - 10;
+            })
+            .attr("y", function (d) {
+              return new_yScale(d.ld[1]) - 10;
+            })
+            .attr("visibility", function (d) {
+              return d.level > transform.k == 0
+                ? "visible"
+                : "hidden";
+            });
+
+          label
+            .selectAll("text")
+            .data(data)
+            .attr("x", function (d) {
+              return new_xScale(d.ld[0]) + 15;
+            })
+            .attr("y", function (d) {
+              return new_yScale(d.ld[1]) + 15;
+            })
+            .attr("visibility", function (d) {
+              return d.level > transform.k == 0 ? "visible" : "hidden";
+            });
+        }
+      });
+    });
+
+    document.getElementById("Learner2").addEventListener("click", function () {
+      document.getElementById("my_dataviz").innerHTML = "";
+
+      // dimensions and margins
+      var margin = {
+        top: 50,
+        right: 30,
+        bottom: 30,
+        left: 210,
+      };
+      var svg = d3.select("svg"),
+        width = 1410 - margin.left - margin.right,
+        height = 620 - margin.top - margin.bottom;
+
+      // create a clipping region
+      svg
+        .append("defs")
+        .append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("width", width)
+        .attr("height", height);
+
+      d3.json("JSON_files/" + sessionStorage.getItem("resultfile")).then(function (data) {
+        // create scale objects
+        var xScale = d3.scaleLinear().domain([0, 1]).range([0, width]);
+        var yScale = d3.scaleLinear().domain([0, 1]).range([height, 0]);
+        // create axis objects
+        var xAxis = d3.axisBottom(xScale).ticks(0).tickSize(-540);
+        var yAxis = d3.axisLeft(yScale).ticks(0).tickSize(-1170);
+
+        // Draw X-Axis
+        var gX = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + (margin.top + height) + ")"
+          )
+          .call(xAxis);
+
+        // Draw Y-Axis
+        var gY = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .call(yAxis);
+
+        // Draw Datapoints
+        var points_g = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .attr("clip-path", "url(#clip)")
+          .classed("points_g", true);
+
+        // Write Labels
+        var label = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .attr("class", "label")
+          .attr("clip-path", "url(#clip)");
+
+        // Draw Tooltip
+        var div = d3
+          .select("body")
+          .append("div")
+          .attr("class", "tooltip")
+          .style("opacity", 0);
+
+        const mouseover = function (event, d) {
+          div.style("opacity", 1);
+        };
+
+        const mousemove = function (event, d) {
+          div
+            .html(`This is ${d.resource_name}`)
+            .style("position", "absolute")
+            .style("left", event.pageX + 15 + "px")
+            .style("top", event.pageY + 15 + "px");
+        };
+
+        const mouseleave = function (event, d) {
+          div.transition().duration(200).style("opacity", 0);
+        };
+
+        var points = points_g.selectAll("point").data(data);
+
+        points = points
+          .enter()
+          .append("image")
+          .attr("xlink:href", function (d) {
+            if (d.type == "learner") return "Images/BlueDot.png";
+            else if (d.type == "none") return "Images/GreenDot.png";
+            else if (d.type == "iiitb") return "Images/BlueDot.png";
+          })
+          .attr("x", function (d) {
+            return xScale(d.ld[0]) - 10;
+          })
+          .attr("y", function (d) {
+            return yScale(d.ld[1]) - 10;
+          })
+          .attr("width", 20)
+          .attr("height", 20)
+          .attr("visibility", function (d) {
+            return d.type == "learner" || d.type == "none" || d.type == "iiitb"
+              ? "visible"
+              : "hidden";
+          })
+          .on("mouseover", mouseover)
+          .on("mousemove", mousemove)
+          .on("mouseleave", mouseleave);
+
+        label
+          .selectAll(".text")
+          .data(data)
+          .enter()
+          .append("text")
+          .text(function (d) {
+            if (d.type == "learner" || d.type == "none" || d.type == "iiitb")
+              return d.resource_name;
+          })
+          .attr("x", function (d) {
+            return xScale(d.ld[0]) + 15;
+          })
+          .attr("y", function (d) {
+            return yScale(d.ld[1]) + 15;
+          });
+
+        // Pan and zoom
+        var zoom = d3
+          .zoom()
+          .scaleExtent([0.5, 20])
+          .extent([
+            [0, 0],
+            [width, height],
+          ])
+          .on("zoom", zoomed);
+
+        svg
+          .append("rect")
+          .attr("width", width)
+          .attr("height", height)
+          .style("fill", "none")
+          .style("pointer-events", "all")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .lower();
+
+        svg.call(zoom).call(zoom.transform, d3.zoomIdentity);
+
+        function zoomed({ transform }) {
+          // create new scale ojects based on event
+          var new_xScale = transform.rescaleX(xScale);
+          var new_yScale = transform.rescaleY(yScale);
+
+          // update axes
+          gX.call(xAxis.scale(new_xScale));
+          gY.call(yAxis.scale(new_yScale));
+
+          // update points
+          points
+            .data(data)
+            .attr("x", function (d) {
+              return new_xScale(d.ld[0]) - 10;
+            })
+            .attr("y", function (d) {
+              return new_yScale(d.ld[1]) - 10;
+            })
+            .attr("visibility", function (d) {
+              return d.level > transform.k == 0 &&
+                (d.type == "learner" || d.type == "none" || d.type == "iiitb")
+                ? "visible"
+                : "hidden";
+            });
+
+          // update label positions
+          label
+            .selectAll("text")
+            .data(data)
+            .attr("x", function (d) {
+              return new_xScale(d.ld[0]) + 15;
+            })
+            .attr("y", function (d) {
+              return new_yScale(d.ld[1]) + 15;
+            })
+            .attr("visibility", function (d) {
+              return d.level > transform.k == 0 &&
+                (d.type == "learner" || d.type == "none" || d.type == "iiitb")
+                ? "visible"
+                : "hidden";
+            });
+        }
+      });
+    });
+
+    document.getElementById("Resource2").addEventListener("click", function () {
+      document.getElementById("my_dataviz").innerHTML = "";
+
+      // dimensions and margins
+      var margin = {
+        top: 50,
+        right: 30,
+        bottom: 30,
+        left: 210,
+      };
+      var svg = d3.select("svg"),
+        width = 1410 - margin.left - margin.right,
+        height = 620 - margin.top - margin.bottom;
+
+      // create a clipping region
+      svg
+        .append("defs")
+        .append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("width", width)
+        .attr("height", height);
+
+      d3.json("JSON_files/" + sessionStorage.getItem("resultfile")).then(function (data) {
+        // create scale objects
+        var xScale = d3.scaleLinear().domain([0, 1]).range([0, width]);
+        var yScale = d3.scaleLinear().domain([0, 1]).range([height, 0]);
+        // create axis objects
+        var xAxis = d3.axisBottom(xScale).ticks(0).tickSize(-540);
+        var yAxis = d3.axisLeft(yScale).ticks(0).tickSize(-1170);
+
+        // Draw Axis
+        var gX = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + (margin.top + height) + ")"
+          )
+          .call(xAxis);
+
+        var gY = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .call(yAxis);
+
+        // Draw Datapoints
+        var points_g = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .attr("clip-path", "url(#clip)")
+          .classed("points_g", true);
+
+        var label = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .attr("class", "label")
+          .attr("clip-path", "url(#clip)");
+
+        var div = d3
+          .select("body")
+          .append("div")
+          .attr("class", "tooltip")
+          .style("opacity", 0);
+
+        const mouseover = function (event, d) {
+          div.style("opacity", 1);
+        };
+
+        const mousemove = function (event, d) {
+          div
+            .html(function (d1) {
+              if (d.type == "learner")
+                return `This is the learner - ${d.resource_name}`;
+              else if (d.type == "Step") return `This is ${d.resource_name}`;
+              else return `The resource name is ${d.resource_name}`;
+            })
+            .style("position", "absolute")
+            .style("left", event.pageX + 15 + "px")
+            .style("top", event.pageY + 15 + "px");
+        };
+
+        const mouseleave = function (event, d) {
+          div.transition().duration(200).style("opacity", 0);
+        };
+
+        var points = points_g.selectAll("point").data(data);
+
+        points = points
+          .enter()
+          .append("image")
+          .attr("xlink:href", function (d) {
+            if (d.type == "video") return "Images/video.jpg";
+            else if (d.type == "pdf") return "Images/pdf.png";
+            else if (d.type == "none") return "Images/GreenDot.png";
+            else if (d.type == "Step") return "Images/Flag.png";
+            else if (d.type == "iiitb") return "Images/BlueDot.png";
+            else if (d.type == "learner") return "Images/BlueDot.png";
+          })
+          .attr("x", function (d) {
+            return xScale(d.ld[0]) - 10;
+          })
+          .attr("y", function (d) {
+            return yScale(d.ld[1]) - 10;
+          })
+          .attr("width", 20)
+          .attr("height", 20)
+          .on("mouseover", mouseover)
+          .on("mousemove", mousemove)
+          .on("mouseleave", mouseleave);
+
+        label
+          .selectAll(".text")
+          .data(data)
+          .enter()
+          .append("text")
+          .text(function (d) {
+            return d.resource_name;
+          })
+          .attr("x", function (d) {
+            return xScale(d.ld[0]) + 10;
+          })
+          .attr("y", function (d) {
+            return yScale(d.ld[1]) + 10;
+          });
+
+        // Pan and zoom
+        var zoom = d3
+          .zoom()
+          .scaleExtent([0.5, 20])
+          .extent([
+            [0, 0],
+            [width, height],
+          ])
+          .on("zoom", zoomed);
+
+        svg
+          .append("rect")
+          .attr("width", width)
+          .attr("height", height)
+          .style("fill", "none")
+          .style("pointer-events", "all")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .lower();
+
+        svg.call(zoom).call(zoom.transform, d3.zoomIdentity);
+
+        function zoomed({ transform }) {
+          // create new scale ojects based on event
+          var new_xScale = transform.rescaleX(xScale);
+          var new_yScale = transform.rescaleY(yScale);
+
+          // update axes
+          gX.call(xAxis.scale(new_xScale));
+          gY.call(yAxis.scale(new_yScale));
+
+          points
+            .data(data)
+            .attr("x", function (d) {
+              return new_xScale(d.ld[0]) - 10;
+            })
+            .attr("y", function (d) {
+              return new_yScale(d.ld[1]) - 10;
+            })
+            .attr("visibility", function (d) {
+              return d.level > transform.k == 0
+                ? "visible"
+                : "hidden";
+            });
+
+          label
+            .selectAll("text")
+            .data(data)
+            .attr("x", function (d) {
+              return new_xScale(d.ld[0]) + 15;
+            })
+            .attr("y", function (d) {
+              return new_yScale(d.ld[1]) + 15;
+            })
+            .attr("visibility", function (d) {
+              return d.level > transform.k == 0 ? "visible" : "hidden";
+            });
+        }
+      });
+    });
+
+    document.getElementById("Pathway").addEventListener("click", function () {
+      document.getElementById("my_dataviz").innerHTML = "";
+
+      // dimensions and margins
+      var margin = {
+        top: 50,
+        right: 30,
+        bottom: 30,
+        left: 210,
+      };
+      var svg = d3.select("svg"),
+        width = 1410 - margin.left - margin.right,
+        height = 620 - margin.top - margin.bottom;
+
+      // create a clipping region
+      svg
+        .append("defs")
+        .append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("width", width)
+        .attr("height", height);
+
+      d3.json("JSON_files/" + Pfname).then(function (data1) {
+        var groupData = d3.group(data1, (d) => d.pathway_name);
+
+        var xScale = d3.scaleLinear().domain([0, 1]).range([0, width]);
+        var yScale = d3.scaleLinear().domain([0, 1]).range([height, 0]);
+
+        var xAxis = d3.axisBottom(xScale).ticks(0).tickSize(-height);
+        var yAxis = d3.axisLeft(yScale).ticks(0).tickSize(-width);
+
+        var gX = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + (margin.top + height) + ")"
+          )
+          .call(xAxis);
+
+        var gY = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .call(yAxis);
+
+        var focus = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .attr("class", "line")
+          .attr("clip-path", "url(#clip)");
+
+        const color = d3
+          .scaleOrdinal()
+          .range(["#e41a1c", "#377eb8", "#4daf4a", "#984ea3"]);
+
+        var points_g = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .attr("clip-path", "url(#clip)")
+          .classed("points_g", true);
+
+        var label = svg
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .attr("class", "label")
+          .attr("clip-path", "url(#clip)");
+
+        var div = d3
+          .select("body")
+          .append("div")
+          .attr("class", "tooltip")
+          .style("opacity", 0);
+
+        const mouseover = function (event, d) {
+          div.style("opacity", 1);
+        };
+
+        const mousemove = function (event, d) {
+          div
+            .html(function (d1) {
+              if (d.type != "learner")
+                return `The resource name is ${d.resource_name}`;
+              else return `This is ${d.name}`;
+            })
+            .style("position", "absolute")
+            .style("left", event.pageX + 15 + "px")
+            .style("top", event.pageY + 15 + "px");
+        };
+
+        const mouseleave = function (event, d) {
+          div.transition().duration(200).style("opacity", 0);
+        };
+
+        var points = points_g.selectAll("point").data(data1);
+
+        points = points
+          .enter()
+          .append("image")
+          .attr("xlink:href", function (d) {
+            if (d.type == "video") return "Images/video.jpg";
+            else if (d.type == "pdf") return "Images/pdf.png";
+            else if (d.type == "none") return "Images/GreenDot.png";
+            else if (d.type == "Step") return "Images/Flag.png";
+            else if (d.type == "iiitb") return "Images/BlueDot.png";
+            else if (d.type == "learner") return "Images/learner.png";
+          })
+          .attr("x", function (d) {
+            return xScale(+d.ld[0]) - 10;
+          })
+          .attr("y", function (d) {
+            return yScale(+d.ld[1]) - 10;
+          })
+          .attr("width", 20)
+          .attr("height", 20)
+          .on("mouseover", mouseover)
+          .on("mousemove", mousemove)
+          .on("mouseleave", mouseleave);
+
+        label
+          .selectAll(".text")
+          .data(data1)
+          .enter()
+          .append("text")
+          .text(function (d) {
+            return d.resource_name;
+          })
+          .attr("x", function (d) {
+            return xScale(+d.ld[0]) + 10;
+          })
+          .attr("y", function (d) {
+            return yScale(+d.ld[1]) + 10;
+          });
+
+        focus
+          .selectAll("line")
+          .data(groupData)
+          .enter()
+          .append("path")
+          .attr("fill", "none")
+          .attr("stroke", function (d) {
+            return color(d[0]);
+          })
+          .attr("stroke-width", 1)
+          .attr("d", function (d) {
+            return d3
+              .line()
+              .curve(d3.curveMonotoneX)
+              .x(function (d) {
+                return xScale(+d.ld[0]);
+              })
+              .y(function (d) {
+                return yScale(+d.ld[1]);
+              })(d[1]);
+          });
+
+        var zoom = d3
+          .zoom()
+          .scaleExtent([0.5, 20])
+          .extent([
+            [0, 0],
+            [width, height],
+          ])
+          .on("zoom", zoomed);
+
+        svg
+          .append("rect")
+          .attr("width", width)
+          .attr("height", height)
+          .style("fill", "none")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          )
+          .lower();
+
+        svg.call(zoom).call(zoom.transform, d3.zoomIdentity);
+
+        function zoomed({ transform }) {
+          var new_xScale = transform.rescaleX(xScale);
+          var new_yScale = transform.rescaleY(yScale);
+
+          gX.call(xAxis.scale(new_xScale));
+          gY.call(yAxis.scale(new_yScale));
+
+          points
+            .data(data1)
+            .attr("x", function (d) {
+              return new_xScale(d.ld[0]) - 10;
+            })
+            .attr("y", function (d) {
+              return new_yScale(d.ld[1]) - 10;
+            })
+            .attr("visibility", function (d) {
+              return d.level > transform.k == 0 ? "visible" : "hidden";
+            });
+
+          label
+            .selectAll("text")
+            .data(data1)
+            .attr("x", function (d) {
+              return new_xScale(d.ld[0]) + 15;
+            })
+            .attr("y", function (d) {
+              return new_yScale(d.ld[1]) + 15;
+            })
+            .attr("visibility", function (d) {
+              return d.level > transform.k == 0 ? "visible" : "hidden";
+            });
+
+          focus.selectAll("path").attr("d", function (d) {
+            return d3
+              .line()
+              .curve(d3.curveMonotoneX)
+              .x(function (d) {
+                return new_xScale(+d.ld[0]);
+              })
+              .y(function (d) {
+                return new_yScale(+d.ld[1]);
+              })(d[1]);
+          });
+        }
+      });
+    });
+
+    document.getElementById("AllLayers1").addEventListener("click", function () {
+      document.getElementById("my_dataviz").innerHTML = "";
+
+      // dimensions and margins
+      var margin = {
+        top: 50,
+        right: 30,
+        bottom: 30,
+        left: 210,
+      };
+      var svg = d3.select("svg"),
+        width = 1410 - margin.left - margin.right,
+        height = 620 - margin.top - margin.bottom;
+
+      // create a clipping region
+      svg
+        .append("defs")
+        .append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("width", width)
+        .attr("height", height);
+
+      d3.json("JSON_files/" + sessionStorage.getItem("resultfile")).then(function (data) {
+
+          var xScale = d3.scaleLinear().domain([0, 1]).range([0, width]);
+          var yScale = d3.scaleLinear().domain([0, 1]).range([height, 0]);
+
+          var xAxis = d3.axisBottom(xScale).ticks(0).tickSize(-height);
+          var yAxis = d3.axisLeft(yScale).ticks(0).tickSize(-width);
+
+          var gX = svg
+            .append("g")
+            .attr(
+              "transform",
+              "translate(" + margin.left + "," + (margin.top + height) + ")"
+            )
+            .call(xAxis);
+
+          var gY = svg
+            .append("g")
+            .attr(
+              "transform",
+              "translate(" + margin.left + "," + margin.top + ")"
+            )
+            .call(yAxis);
+
+          const color = d3
+            .scaleOrdinal()
+            .range(["#e41a1c", "#377eb8", "#4daf4a", "#984ea3"]);
+
+          var points_g = svg
+            .append("g")
+            .attr(
+              "transform",
+              "translate(" + margin.left + "," + margin.top + ")"
+            )
+            .attr("clip-path", "url(#clip)")
+            .classed("points_g", true);
+
+          var label = svg
+            .append("g")
+            .attr(
+              "transform",
+              "translate(" + margin.left + "," + margin.top + ")"
+            )
+            .attr("class", "label")
+            .attr("clip-path", "url(#clip)");
+
+          var div = d3
+            .select("body")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+          const mouseover = function (event, d) {
+            div.style("opacity", 1);
+          };
+
+          const mousemove = function (event, d) {
+            div
+              .html(function (d1) {
+                if (d.type != "learner")
+                  return `The resource name is ${d.resource_name}`;
+                else return `This is ${d.resource_name}`;
+              })
+              .style("position", "absolute")
+              .style("left", event.pageX + 15 + "px")
+              .style("top", event.pageY + 15 + "px");
+          };
+
+          const mouseleave = function (event, d) {
+            div.transition().duration(200).style("opacity", 0);
+          };
+
+          var points = points_g.selectAll("point").data(data);
+
+          points = points
+            .enter()
+            .append("image")
+            .attr("xlink:href", function (d) {
+              if (d.type == "video") return "Images/video.jpg";
+              else if (d.type == "pdf") return "Images/pdf.png";
+              else if (d.type == "none") return "Images/GreenDot.png";
+              else if (d.type == "Step") return "Images/Flag.png";
+              else if (d.type == "learner") return "Images/BlueDot.png";
+            })
+            .attr("x", function (d) {
+              return xScale(+d.ld[0]) - 10;
+            })
+            .attr("y", function (d) {
+              return yScale(+d.ld[1]) - 10;
+            })
+            .attr("width", 20)
+            .attr("height", 20)
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseleave", mouseleave);
+
+          label
+            .selectAll(".text")
+            .data(data)
+            .enter()
+            .append("text")
+            .text(function (d) {
+              return d.resource_name;
+            })
+            .attr("x", function (d) {
+              return xScale(+d.ld[0]) + 10;
+            })
+            .attr("y", function (d) {
+              return yScale(+d.ld[1]) + 10;
+            });
+
+          var zoom = d3
+            .zoom()
+            .scaleExtent([0.5, 20])
+            .extent([
+              [0, 0],
+              [width, height],
+            ])
+            .on("zoom", zoomed);
+
+          svg
+            .append("rect")
+            .attr("width", width)
+            .attr("height", height)
+            .style("fill", "none")
+            .attr(
+              "transform",
+              "translate(" + margin.left + "," + margin.top + ")"
+            )
+            .lower();
+
+          svg.call(zoom).call(zoom.transform, d3.zoomIdentity);
+
+          function zoomed({ transform }) {
+            var new_xScale = transform.rescaleX(xScale);
+            var new_yScale = transform.rescaleY(yScale);
+
+            gX.call(xAxis.scale(new_xScale));
+            gY.call(yAxis.scale(new_yScale));
+
+            points
+              .data(data)
+              .attr("x", function (d) {
+                return new_xScale(d.ld[0]) - 10;
+              })
+              .attr("y", function (d) {
+                return new_yScale(d.ld[1]) - 10;
+              })
+              .attr("visibility", function (d) {
+                return d.level > transform.k == 0 ? "visible" : "hidden";
+              });
+
+            label
+              .selectAll("text")
+              .data(data)
+              .attr("x", function (d) {
+                return new_xScale(d.ld[0]) + 15;
+              })
+              .attr("y", function (d) {
+                return new_yScale(d.ld[1]) + 15;
+              })
+              .attr("visibility", function (d) {
+                return d.level > transform.k == 0 ? "visible" : "hidden";
+              });
+
+          }
+        // });
+      });
+    });
+
+    document.getElementById("AllLayers2").addEventListener("click", function () {
+      document.getElementById("my_dataviz").innerHTML = "";
+
+      // dimensions and margins
+      var margin = {
+        top: 50,
+        right: 30,
+        bottom: 30,
+        left: 210,
+      };
+      var svg = d3.select("svg"),
+        width = 1410 - margin.left - margin.right,
+        height = 620 - margin.top - margin.bottom;
+
+      // create a clipping region
+      svg
+        .append("defs")
+        .append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("width", width)
+        .attr("height", height);
+
+      d3.json("JSON_files/" + sessionStorage.getItem("resultfile")).then(function (data) {
+        d3.json("JSON_files/" + Pfname).then(function (data1) {
+          var groupData = d3.group(data1, (d) => d.pathway_name);
+
+          var xScale = d3.scaleLinear().domain([0, 1]).range([0, width]);
+          var yScale = d3.scaleLinear().domain([0, 1]).range([height, 0]);
+
+          var xAxis = d3.axisBottom(xScale).ticks(0).tickSize(-height);
+          var yAxis = d3.axisLeft(yScale).ticks(0).tickSize(-width);
+
+          var gX = svg
+            .append("g")
+            .attr(
+              "transform",
+              "translate(" + margin.left + "," + (margin.top + height) + ")"
+            )
+            .call(xAxis);
+
+          var gY = svg
+            .append("g")
+            .attr(
+              "transform",
+              "translate(" + margin.left + "," + margin.top + ")"
+            )
+            .call(yAxis);
+
+          var focus = svg
+            .append("g")
+            .attr(
+              "transform",
+              "translate(" + margin.left + "," + margin.top + ")"
+            )
+            .attr("class", "line")
+            .attr("clip-path", "url(#clip)");
+
+          const color = d3
+            .scaleOrdinal()
+            .range(["#e41a1c", "#377eb8", "#4daf4a", "#984ea3"]);
+
+          var points_g = svg
+            .append("g")
+            .attr(
+              "transform",
+              "translate(" + margin.left + "," + margin.top + ")"
+            )
+            .attr("clip-path", "url(#clip)")
+            .classed("points_g", true);
+
+          var label = svg
+            .append("g")
+            .attr(
+              "transform",
+              "translate(" + margin.left + "," + margin.top + ")"
+            )
+            .attr("class", "label")
+            .attr("clip-path", "url(#clip)");
+
+          var div = d3
+            .select("body")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+          const mouseover = function (event, d) {
+            div.style("opacity", 1);
+          };
+
+          const mousemove = function (event, d) {
+            div
+              .html(function (d1) {
+                if (d.type != "learner")
+                  return `The resource name is ${d.resource_name}`;
+                else return `This is ${d.resource_name}`;
+              })
+              .style("position", "absolute")
+              .style("left", event.pageX + 15 + "px")
+              .style("top", event.pageY + 15 + "px");
+          };
+
+          const mouseleave = function (event, d) {
+            div.transition().duration(200).style("opacity", 0);
+          };
+
+          var points = points_g.selectAll("point").data(data);
+
+          points = points
+            .enter()
+            .append("image")
+            .attr("xlink:href", function (d) {
+              if (d.type == "video") return "Images/video.jpg";
+              else if (d.type == "pdf") return "Images/pdf.png";
+              else if (d.type == "none") return "Images/GreenDot.png";
+              else if (d.type == "Step") return "Images/Flag.png";
+              else if (d.type == "learner") return "Images/BlueDot.png";
+            })
+            .attr("x", function (d) {
+              return xScale(+d.ld[0]) - 10;
+            })
+            .attr("y", function (d) {
+              return yScale(+d.ld[1]) - 10;
+            })
+            .attr("width", 20)
+            .attr("height", 20)
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseleave", mouseleave);
+
+          label
+            .selectAll(".text")
+            .data(data)
+            .enter()
+            .append("text")
+            .text(function (d) {
+              return d.resource_name;
+            })
+            .attr("x", function (d) {
+              return xScale(+d.ld[0]) + 10;
+            })
+            .attr("y", function (d) {
+              return yScale(+d.ld[1]) + 10;
+            });
+
+          focus
+            .selectAll("line")
+            .data(groupData)
+            .enter()
+            .append("path")
+            .attr("fill", "none")
+            .attr("stroke", function (d) {
+              return color(d[0]);
+            })
+            .attr("stroke-width", 1)
+            .attr("d", function (d) {
+              return d3
+                .line()
+                .curve(d3.curveMonotoneX)
+                .x(function (d) {
+                  return xScale(+d.ld[0]);
+                })
+                .y(function (d) {
+                  return yScale(+d.ld[1]);
+                })(d[1]);
+            });
+
+          var zoom = d3
+            .zoom()
+            .scaleExtent([0.5, 20])
+            .extent([
+              [0, 0],
+              [width, height],
+            ])
+            .on("zoom", zoomed);
+
+          svg
+            .append("rect")
+            .attr("width", width)
+            .attr("height", height)
+            .style("fill", "none")
+            .attr(
+              "transform",
+              "translate(" + margin.left + "," + margin.top + ")"
+            )
+            .lower();
+
+          svg.call(zoom).call(zoom.transform, d3.zoomIdentity);
+
+          function zoomed({ transform }) {
+            var new_xScale = transform.rescaleX(xScale);
+            var new_yScale = transform.rescaleY(yScale);
+
+            gX.call(xAxis.scale(new_xScale));
+            gY.call(yAxis.scale(new_yScale));
+
+            points
+              .data(data)
+              .attr("x", function (d) {
+                return new_xScale(d.ld[0]) - 10;
+              })
+              .attr("y", function (d) {
+                return new_yScale(d.ld[1]) - 10;
+              })
+              .attr("visibility", function (d) {
+                return d.level > transform.k == 0 ? "visible" : "hidden";
+              });
+
+            label
+              .selectAll("text")
+              .data(data)
+              .attr("x", function (d) {
+                return new_xScale(d.ld[0]) + 15;
+              })
+              .attr("y", function (d) {
+                return new_yScale(d.ld[1]) + 15;
+              })
+              .attr("visibility", function (d) {
+                return d.level > transform.k == 0 ? "visible" : "hidden";
+              });
+
+            focus.selectAll("path").attr("d", function (d) {
+              return d3
+                .line()
+                .curve(d3.curveMonotoneX)
+                .x(function (d) {
+                  return new_xScale(+d.ld[0]);
+                })
+                .y(function (d) {
+                  return new_yScale(+d.ld[1]);
+                })(d[1]);
+            });
+          }
+        });
+      });
+    });
+  } catch (e) {
+    alert(e);
+  }
+</script>
